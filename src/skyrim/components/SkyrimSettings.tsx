@@ -11,10 +11,12 @@ import {
 } from '../store';
 
 interface SettingsProps {
+  open?: boolean;
   onClose: () => void;
+  onChanged?: () => void;
 }
 
-export const SkyrimSettings: React.FC<SettingsProps> = ({ onClose }) => {
+export const SkyrimSettings: React.FC<SettingsProps> = ({ open = true, onClose, onChanged }) => {
   const [sync, setSync] = useState(EMPTY_SYNC);
   const [gasUrl, setGasUrl] = useState('');
   const [gasSecret, setGasSecret] = useState('');
@@ -27,6 +29,7 @@ export const SkyrimSettings: React.FC<SettingsProps> = ({ onClose }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    if (!open) return;
     const unsub = subscribeSync(setSync);
     
     // Load initial settings
@@ -34,7 +37,7 @@ export const SkyrimSettings: React.FC<SettingsProps> = ({ onClose }) => {
     getSetting('gas_secret').then(setGasSecret);
 
     return () => unsub();
-  }, []);
+  }, [open]);
 
   const handleForceSync = async () => {
     setLoading('sync');
@@ -44,6 +47,7 @@ export const SkyrimSettings: React.FC<SettingsProps> = ({ onClose }) => {
       setStatusText(res.summary);
       if (res.ok) {
         toast("同步完成");
+        onChanged?.();
         // Trigger page refresh using store reload shim if required
         globalThis.location.reload();
       } else {
@@ -181,6 +185,10 @@ export const SkyrimSettings: React.FC<SettingsProps> = ({ onClose }) => {
   };
 
   const textInputStyle = "w-full px-3 py-2 rounded bg-stone-900/90 border border-stone-800 text-amber-100 font-mono text-xs focus:outline-none focus:border-amber-500/60";
+
+  // 修正：先前這個元件無條件渲染全螢幕遮罩，把整個網頁蓋住且永遠關不掉；
+  // 現在只有 App 傳入 open=true（設定分頁）時才渲染。
+  if (!open) return null;
 
   return (
     <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
