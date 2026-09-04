@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "strict": false,
+    "allowJs": true,
+    "outDir": "build/ts",
+    "noEmit": false
+  },
+  "include": [
+    "src/globals.d.ts",
+    "src/dates.ts",
+    "src/game-core.ts",
+    "src/db.ts",
+    "src/data-layer.ts",
+    "src/gas-proxy.ts",
+    "src/sync-manager.ts",
+    "src/game-engine.ts",
+    "src/animations.ts",
+    "src/backup.ts"
+  ]
+}

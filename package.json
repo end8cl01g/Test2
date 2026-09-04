@@ -1,0 +1,53 @@
+{
+  "name": "hs-tracker",
+  "private": true,
+  "version": "2.0.0",
+  "description": "Press to Handstand Tracker — 離線優先 PWA（sql.js + GitHub Pages + GAS Proxy）",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port=3000 --host=0.0.0.0",
+    "ts:loose": "node scripts/deps.mjs && tsc -p tsconfig.loose.json",
+    "test": "node scripts/secrets-mode.mjs && npm run ts:loose && node --test tests/*.test.mjs",
+    "build": "vite build && node scripts/web-post.mjs",
+    "gas:build": "node scripts/deps.mjs && tsc -p gas/tsconfig.json --noEmit && rollup -c rollup.gas.config.mjs",
+    "typecheck": "node scripts/deps.mjs && tsc -p tsconfig.app.json && tsc -p tsconfig.json --noEmit",
+    "plan": "node scripts/gen-plan.mjs",
+    "plan:check": "node scripts/gen-plan.mjs --check",
+    "check": "node scripts/check.mjs",
+    "preview": "vite preview",
+    "clean": "rm -rf dist server.js",
+    "lint": "node scripts/deps.mjs && tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/cinzel": "^5.3.0",
+    "@fontsource/medievalsharp": "^5.3.0",
+    "@google/genai": "^2.4.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1",
+    "sql.js": "^1.14.2",
+    "vite": "^6.2.3"
+  },
+  "devDependencies": {
+    "@google/clasp": "^3.4.1",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^1.0.0",
+    "@rollup/plugin-typescript": "^12.3.0",
+    "@types/express": "^4.17.21",
+    "@types/google-apps-script": "^2.0.12",
+    "@types/node": "^22.14.0",
+    "autoprefixer": "^10.4.21",
+    "esbuild": "^0.25.0",
+    "rollup": "^4.63.1",
+    "tailwindcss": "^4.1.14",
+    "tslib": "^2.8.1",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.3"
+  }
+}

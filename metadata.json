@@ -1,0 +1,6 @@
+{
+  "name": "倒立之殿 · Press to Handstand",
+  "description": "52 週倒立訓練 Skyrim 風格界面：星圖解鎖、卷軸課表、龍語成就。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

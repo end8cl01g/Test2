@@ -1,0 +1,14 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+.deploy/
+.clasp.json
+gas/.clasp.json
+.clasprc.json
+Bootstrap.gs
+*.token
